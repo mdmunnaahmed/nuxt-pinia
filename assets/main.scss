@@ -1,5 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
 body {
   background: #f2f2f2;
   color: #444;
@@ -51,8 +58,7 @@ header h1 {
   justify-content: space-between;
 }
 
-.task h3,
-.task .icons {
+.task h3 {
   display: inline-block;
 }
 
@@ -129,4 +135,12 @@ form input {
   text-align: center;
   margin: 30px auto;
   background-color: #ffd85945;
+}
+button.active {
+  background: green;
+  border-color: green;
+  color: white;
+}
+.material-icons.active svg {
+  fill: red;
 }

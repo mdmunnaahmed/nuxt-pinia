@@ -4,7 +4,6 @@
     <header>
       <img src="https://pinia.vuejs.org/logo.svg" alt="pinia logo" />
       <h1>Nuxt Store</h1>
-      <h1>{{ taskStore.name }}</h1>
     </header>
 
     <div class="new-task-form">
@@ -12,22 +11,27 @@
     </div>
 
     <nav class="filter">
-      <button @click="filter = 'all'">All Tasks</button>
-      <button @click="filter = 'favs'">Fav Tasks</button>
+      <button :class="{ active: (filter === 'all') }" @click="filter = 'all'">
+        All Tasks
+      </button>
+      <button :class="{ active: (filter === 'favs') }" @click="filter = 'favs'">
+        Fav Tasks
+      </button>
     </nav>
-
-    <div class="loading" v-if="isLoading">Loading tasks...</div>
+    <div v-if="taskStore.loading" class="text-center bg-gray-300 container mx-auto mb-12 mt-10">
+      <span>Loading</span>
+    </div>
 
     <div class="task-list" v-if="filter === 'all'">
-      <p>You have Total ({{ totalCount }}) to do</p>
-      <div v-for="task in tasks" :key="task">
+      <p>You have Total ({{ taskStore.totalCount }}) to do</p>
+      <div v-for="task in taskStore.tasks" :key="task">
         <TaskDetails :task="task" />
       </div>
     </div>
 
     <div class="task-list" v-if="filter === 'favs'">
-      <p>Favs Tasks ({{ favCount }})</p>
-      <div v-for="task in favs" :key="task">
+      <p>Favs Tasks ({{ taskStore.favCount }})</p>
+      <div v-for="task in taskStore.favs" :key="task">
         <TaskDetails :task="task" />
       </div>
     </div>
@@ -39,15 +43,16 @@
 </template>
 
 <script>
-import { useTaskStore } from '~/stores/TaskStore';
+import { ref } from "vue";
+import { useTaskStore } from "~/stores/TaskStore";
 export default {
   setup() {
     const taskStore = useTaskStore();
 
     taskStore.getTasks();
 
-    // const filter = ref("all");
-    return { taskStore };
+    const filter = ref("all");
+    return { taskStore, filter };
   },
 };
 </script>

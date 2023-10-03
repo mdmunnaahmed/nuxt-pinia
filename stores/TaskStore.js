@@ -2,24 +2,8 @@
 export const useTaskStore = defineStore("taskStore", {
   state: () => ({
     name: "Munna",
-    tasks: [
-      {
-        id: 3,
-        title: "buy milk shade",
-        isFav: true,
-      },
-      {
-        id: 4,
-        title: "this is munns",
-        isFav: true,
-      },
-      {
-        title: "we are here on this special day",
-        isFav: true,
-        id: 8427,
-      },
-    ],
-    isLoading: false,
+    tasks: [],
+    loading: false,
   }),
   actions: {
     async getTasks() {
